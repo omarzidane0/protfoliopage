@@ -15,10 +15,13 @@ def home():
         username = request.form.get("username")
         email = request.form.get("email")
         msg = request.form.get("msg")
+        if username == "" or email == "" or msg == "":
+            return render_template("index.html" , alert="Allert : Please Fill All Fields")
         print(username +"\n" + email +"\n"+msg+"\n")
         msg = message(username , email , msg)
         db.session.add(msg)
         db.session.commit()
+
         return redirect("/")       
     return render_template("index.html")
 
